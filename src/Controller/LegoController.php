@@ -4,6 +4,7 @@
 namespace App\Controller;
 /* indique l'utilisation du bon bundle pour gérer nos routes */
 use App\Entity\Lego;
+use App\Service\LegoService;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,23 +24,35 @@ class LegoController extends AbstractController
     //         'msg' => $msg,
     //     ]);
     // }
-    public function home() :Response
+    public function home(LegoService $legoService): Response
     {
-        $lego = new Lego(10252, "La coccinelle Volkwagen", "Creator Expert");
-        $lego->setBoxImage("LEGO_10252_Box.png");
-        $lego->setLegoImage("LEGO_10252_Main.jpg");
-        $lego->setPrice(94.99);
-        $lego->setPieces(1167);
-        $lego->setDescription("Construis une réplique LEGO® Creator Expert de l'automobile la plus populaire au monde. Ce magnifique modèle LEGO est plein de détails authentiques qui capturent le charme et la personnalité de la voiture, notamment un coloris bleu ciel, des ailes arrondies, des jantes blanches avec des enjoliveurs caractéristiques, des phares ronds et des clignotants montés sur les ailes.");
-        
-        return $this->render('lego.html.twig', [
+        $legos = $legoService->getLegos();
+        $output = '';
+        foreach ($legos as $lego) {
+            $output .= $this->renderView('lego.html.twig', [
             'lego' => $lego,
-        ]);
+            ]);
+        }
+        return new Response($output);
     }
     #[Route('/me', name: 'me')]
     public function me()
     {
         die("Allez.");
+    }
+
+
+    #[Route('/{collection}', name: 'lego')]
+    public function lego(LegoService $legoService, $collection)
+    {
+        $lego = $legoService->getLegosByCollection($collection);
+        $output = '';
+        foreach ($lego as $lego) {
+            $output .= $this->renderView('lego.html.twig', [
+            'lego' => $lego,
+            ]);
+        }
+        return new Response($output);
     }
 }
 ?>
