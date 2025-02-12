@@ -32,9 +32,6 @@ class Lego
     #[ORM\Column(length: 255)]
     private ?string $imageBg = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $collection = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -108,18 +105,6 @@ class Lego
     public function setImageBg(string $imageBg): static
     {
         $this->imageBg = $imageBg;
-
-        return $this;
-    }
-
-    public function getCollection(): ?string
-    {
-        return $this->collection;
-    }
-
-    public function setCollection(string $collection): static
-    {
-        $this->collection = $collection;
 
         return $this;
     }
