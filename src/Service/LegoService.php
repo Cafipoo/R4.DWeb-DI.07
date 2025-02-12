@@ -28,8 +28,8 @@ class LegoService
             $lego->setDescription($res['description']);
             $lego->setPrice($res['price']);
             $lego->setPieces($res['pieces']);
-            $lego->setBoxImage($res['imagebox']);
-            $lego->setLegoImage($res['imagebg']);
+            $lego->setImageBox($res['imagebox']);
+            $lego->setImageBg($res['imagebg']);
             $legos[] = $lego;
         }
         return $legos;
@@ -54,8 +54,8 @@ class LegoService
                 $lego->setDescription($res['description']);
                 $lego->setPrice($res['price']);
                 $lego->setPieces($res['pieces']);
-                $lego->setBoxImage($res['imagebox']);
-                $lego->setLegoImage($res['imagebg']);
+                $lego->setImageBox($res['imagebox']);
+                $lego->setImageBg($res['imagebg']);
                 $legoCollection[] = $lego;
             }
             return $legoCollection;
