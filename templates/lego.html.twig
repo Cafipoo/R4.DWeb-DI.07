@@ -1,39 +1,47 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Lego List{% endblock %}
+
 {% block stylesheets %}
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
-  <link  rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css">
 {% endblock %}
 
 {% block body %}
-<div class="lego_card">
-      <div class="info_section">
-        <div class="lego_header">
-          <img class="locandina" src="/images/{{lego.imagebox}}"/>
-          <h1>{{lego.name}}</h1>
-          <h4>Collection : {{lego.collection}}</h4>
-          <span class="pieces">Pièces : {{lego.pieces}}</span>
-          <p class="price">{{lego.price}}€</p><br>
-          <a href="index.php?buy={{lego.id}}"><button>Buy</button></a>
-        </div>
-        <div class="lego_desc">
-          <p class="text">
-            {{lego.description}}
-        </p>
-        </div>
-        <div class="lego_social">
-          <ul>
-            <li><i class="material-icons">share</i></li>
-            <li><i class="material-icons"></i></li>
-            <li><i class="material-icons">chat_bubble</i></li>
-          </ul>
-
-        </div>
-
-      </div>
-      <div class="blur_back">
-        <img src="/images/{{lego.imagebg}}" alt="background lego card">
-      </div>
-</div>
+    <nav>
+        <a href="/">All</a>|
+        {% for collection in collections %}
+            <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
+        {% endfor %}
+    </nav>
+    <ul>
+        {% for lego in legos %}
+                <div class="lego_card">
+                    <div class="info_section">
+                        <div class="lego_header">
+                            <img class="locandina" src="{{ asset('images/' ~ lego.imageBox) }}" alt="Box Image"/>
+                            <h2>{{ lego.name }}</h2>
+                            <h4>Collection: {{ lego.collection.name }}</h4>
+                            <span class="pieces">Pieces: {{ lego.pieces }}</span>
+                            <p class="price">{{ lego.price }}€</p><br>
+                            <a href="index.php?buy={{ lego.id }}"><button>Buy</button></a>
+                        </div>
+                        <div class="lego_desc">
+                            <p class="text">{{ lego.description }}</p>
+                        </div>
+                        <div class="lego_social">
+                            <ul>
+                                <li><i class="material-icons">share</i></li>
+                                <li><i class="material-icons"></i></li>
+                                <li><i class="material-icons">chat_bubble</i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="blur_back">
+                        <img src="{{ asset('images/' ~ lego.imagebg) }}" alt="Background Lego Image">
+                    </div>
+                </div>
+        {% endfor %}
+    </ul>
 {% endblock %}
