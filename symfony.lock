@@ -92,6 +92,7 @@
             "config/routes.yaml"
         ]
     },
+<<<<<<< HEAD
     "symfony/security-bundle": {
         "version": "7.2",
         "recipe": {
@@ -105,6 +106,8 @@
             "config/routes/security.yaml"
         ]
     },
+=======
+>>>>>>> 62c2c87db922e803ba32926268c653999c4ccf09
     "symfony/twig-bundle": {
         "version": "7.2",
         "recipe": {
@@ -118,6 +121,7 @@
             "templates/base.html.twig"
         ]
     },
+<<<<<<< HEAD
     "symfony/web-profiler-bundle": {
         "version": "7.2",
         "recipe": {
@@ -131,6 +135,8 @@
             "config/routes/web_profiler.yaml"
         ]
     },
+=======
+>>>>>>> 62c2c87db922e803ba32926268c653999c4ccf09
     "twig/extra-bundle": {
         "version": "v3.19.0"
     }
