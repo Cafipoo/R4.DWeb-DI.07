@@ -18,6 +18,9 @@ class LegoCollection
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(type: "boolean")]
+    private $isPremium;
+
     /**
      * @var Collection<int, Lego>
      */
@@ -49,6 +52,17 @@ class LegoCollection
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+    public function getIsPremium(): bool
+    {
+        return $this->isPremium;
+    }
+
+    public function setIsPremium(bool $isPremium): self
+    {
+        $this->isPremium = $isPremium;
 
         return $this;
     }
