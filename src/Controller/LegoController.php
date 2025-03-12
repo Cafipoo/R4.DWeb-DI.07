@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LegoController extends AbstractController
 {
-#[Route('/', name: 'home')]
+    #[Route('/', name: 'home')]
     public function home(LegoRepository $legoRepository, LegoCollectionRepository $legoCollectionRepository): Response
     {
         $legos = $legoRepository->findAll();
@@ -30,13 +30,13 @@ class LegoController extends AbstractController
     }
 
     #[Route('/collections/{id}', name: 'lego')]
-    public function lego(LegoRepository $legoRepository, LegoCollection $collection,LegoCollectionRepository $legoCollectionRepository): Response
+    public function lego(legoCollection $legoCollection, LegoCollection $collection,LegoCollectionRepository $legoCollectionRepository): Response
     {
         if ($collection->getIsPremium() && !$this->isGranted('ROLE_USER')) {
             throw $this->createAccessDeniedException('You do not have access to this collection.');
         }
 
-        $legos = $legoRepository->findBy(['collection' => $collection]);
+        $legos = $legoCollection->getLegos( $collection);
         $collections = $legoCollectionRepository->findAll();
         return $this->render('lego.html.twig', [
             'legos' => $legos,

@@ -11,20 +11,18 @@
 {% block body %}
     <nav>
         <a href="/">All</a>|
-        {% for collection in collections %}
-            {% if not collection.isPremium %}
-                <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
-            {% endif %}
-        {% endfor %}
         {% if app.user %}
             {% for collection in collections %}
-                {% if collection.isPremium %}
-                    <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
-                {% endif %}
+                <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
             {% endfor %}
             <span>Bonjour {{ app.user.email }} !</span>
             <a href="{{ path('lego_store_logout') }}">Se déconnecter</a>
         {% else %}
+            {% for collection in collections %}
+                {% if not collection.isPremium %}
+                    <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
+                {% endif %}
+            {% endfor %}
             <a href="{{ path('lego_store_login') }}">Se connecter</a>
         {% endif %}
     </nav>
