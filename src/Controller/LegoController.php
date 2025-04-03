@@ -15,8 +15,22 @@ class LegoController extends AbstractController
     #[Route('/', name: 'home')]
     public function home(LegoRepository $legoRepository, LegoCollectionRepository $legoCollectionRepository): Response
     {
-        $legos = $legoRepository->findAll();
         $collections = $legoCollectionRepository->findAll();
+        $legos = $legoRepository->findAll();
+        
+        // Si l'utilisateur n'est pas connecté, filtrer les collections premium et leurs LEGO
+        if (!$this->isGranted('ROLE_USER')) {
+            // Filtrer les collections premium
+            $collections = array_filter($collections, function($collection) {
+                return !$collection->getIsPremium();
+            });
+            
+            // Filtrer les LEGO qui appartiennent aux collections premium
+            $legos = array_filter($legos, function($lego) {
+                return !$lego->getCollection()->getIsPremium();
+            });
+        }
+        
         return $this->render('lego.html.twig', [
             'legos' => $legos,
             'collections' => $collections,

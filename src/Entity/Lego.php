@@ -26,10 +26,10 @@ class Lego
     #[ORM\Column]
     private ?int $pieces = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: 'imagebox')]
     private ?string $imageBox = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: 'imagebg')]
     private ?string $imageBg = null;
 
     #[ORM\ManyToOne]
