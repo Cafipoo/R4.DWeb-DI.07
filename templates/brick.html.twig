@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lego List{% endblock %}
+
+{% block stylesheets %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+{% endblock %}
+
+{% block body %}
+    <nav>
+        <a href="/">Retourné en arrière</a>|
+            {% for collection in collections %}
+                <a href="{{ path('brick', {id: collection.id}) }}">{{ collection.collectionName }} </a>|
+            {% endfor %}
+            {% if app.user %}
+                <span>Bonjour {{ app.user.email }} !</span>
+                <a href="{{ path('lego_store_logout') }}">Se déconnecter</a>
+            {% else %}
+                <a href="{{ path('lego_store_login') }}">Se connecter</a>
+            {% endif %}
+    </nav>
+    <ul>
+        {% for lego in legos %}
+                <div class="brick_card">
+                    <div class="brick_header">
+                        <img class="locandina" src="{{ asset('images/' ~ lego.image) }}" alt="Box Image"/>
+                        <h4 class="type">Meilleurs ventes</h4>
+                        <div class="data_obj">
+                            <h2 class="smalltxt">{{ lego.name }},</h2>
+                            <h2 class="smalltxt">NO. {{ lego.number }}</h2>
+                        </div>
+                        <h2 class="smallid">
+                            ID: {{lego.id}}
+                        </h2>
+                        <p class="price price_brick">{{ lego.price }}€</p><br>
+                        <a  href="index.php?buy={{ lego.id }}"><button class="choose">Choisir</button></a>
+                    </div>
+                </div>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+    {# <nav>
+        <a href="/">All</a>|
+        
+        {% for collection in collections %}
+            {% if collection.name != "Premium" %}
+            <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
+            {% endif %}
+        {% endfor %}
+        {% if app.user %}
+            {% for collection in collections %}
+                {% if collection.name == "Premium" %}
+                    <a href="{{ path('lego', {id: collection.id}) }}">{{ collection.name }} </a>|
+                {% endif %}
+            {% endfor %}
+            <span>Bonjour {{ app.user.email }} !</span>
+
+            <a href="{{ path('lego_store_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('lego_store_login') }}">Se connecter</a>
+        {% endif %}
+    </nav> #}

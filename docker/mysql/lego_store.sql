@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : tp-symfony-mysql
--- Généré le : jeu. 03 avr. 2025 à 20:14
+-- Généré le : ven. 04 avr. 2025 à 07:56
 -- Version du serveur : 8.4.4
 -- Version de PHP : 8.2.27
 
@@ -24,11 +24,63 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `brick`
+--
+
+CREATE TABLE `brick` (
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number` int NOT NULL,
+  `price` double NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `collection_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `brick`
+--
+
+INSERT INTO `brick` (`id`, `name`, `number`, `price`, `image`, `collection_id`) VALUES
+(6388641, 'TUB', 0, 0.46, '6388641.jpg', 3),
+(6424600, 'INTERIOR', 8, 1.38, '6424600.jpg', 3),
+(6435171, 'OTTER', 2, 1.58, '6435171.jpg', 2),
+(6438776, 'PLANT, W/ 3.2 SHAFT, 1.5 HOLE', 1, 0.12, '6438776.jpg', 2),
+(6440966, 'TURTLE', 11, 0.12, '6440966.jpg', 2),
+(6444464, 'MINI WIG', 174, 1.82, '6444464.jpg', 1),
+(6446937, 'MINI HEAD', 4152, 0.26, '6446937.jpg', 1),
+(6446963, 'FLAG, W/ 2 HOLDERS', 22, 2.48, '6446963.jpg', 3),
+(6449633, 'MINI LOWER PART', 2550, 0.9, '6449633.jpg', 1),
+(6460998, 'MINI UPPER PART', 6825, 1.45, '6460998.jpg', 1),
+(63699367, 'DOOR 4X6, W/ CUT OUT', 1, 0.86, '6369367.jpg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `brick_collection`
+--
+
+CREATE TABLE `brick_collection` (
+  `id` int NOT NULL,
+  `collection_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `brick_collection`
+--
+
+INSERT INTO `brick_collection` (`id`, `collection_name`) VALUES
+(1, 'Figurines'),
+(2, 'Nature'),
+(3, 'Meubles');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `doctrine_migration_versions`
 --
 
 CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
@@ -48,7 +100,10 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20250312131001', NULL, NULL),
 ('DoctrineMigrations\\Version20250312145917', NULL, NULL),
 ('DoctrineMigrations\\Version20250403193437', NULL, NULL),
-('DoctrineMigrations\\Version20250403195652', '2025-04-03 19:57:01', 250);
+('DoctrineMigrations\\Version20250403195652', '2025-04-03 19:57:01', 250),
+('DoctrineMigrations\\Version20250404061328', '2025-04-04 06:13:54', 56),
+('DoctrineMigrations\\Version20250404061846', '2025-04-04 06:19:19', 57),
+('DoctrineMigrations\\Version20250404063155', '2025-04-04 06:32:38', 138);
 
 -- --------------------------------------------------------
 
@@ -90,7 +145,7 @@ INSERT INTO `lego` (`id`, `name`, `description`, `price`, `pieces`, `imagebox`, 
 
 CREATE TABLE `lego_collection` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_premium` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -112,9 +167,9 @@ INSERT INTO `lego_collection` (`id`, `name`, `is_premium`) VALUES
 
 CREATE TABLE `user` (
   `id` int NOT NULL,
-  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -127,6 +182,19 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `brick`
+--
+ALTER TABLE `brick`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_3750CB3C514956FD` (`collection_id`);
+
+--
+-- Index pour la table `brick_collection`
+--
+ALTER TABLE `brick_collection`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `doctrine_migration_versions`
@@ -159,6 +227,18 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `brick`
+--
+ALTER TABLE `brick`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63699368;
+
+--
+-- AUTO_INCREMENT pour la table `brick_collection`
+--
+ALTER TABLE `brick_collection`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `lego`
 --
 ALTER TABLE `lego`
@@ -179,6 +259,12 @@ ALTER TABLE `user`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `brick`
+--
+ALTER TABLE `brick`
+  ADD CONSTRAINT `FK_3750CB3C514956FD` FOREIGN KEY (`collection_id`) REFERENCES `brick_collection` (`id`);
 
 --
 -- Contraintes pour la table `lego`

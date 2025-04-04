@@ -420,3 +420,52 @@ nav a {
 .login-form .btn-submit {
 	width: 120px;
 }
+
+.type{
+	background-color: rgb(255, 230, 0);
+	color: black;
+	padding: 4px 4px;
+	font: bold;
+	width: fit-content;
+}
+.choose{
+	background-color: #003cff;
+	color: white;
+	width: 100%;
+	border: none;
+	padding: 1rem 2rem;
+	border-radius: 5px;
+	text-transform: uppercase;
+}
+
+.data_obj{
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.brick_card{
+	padding-top: 2rem;
+	z-index: -10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	max-width: 20rem;
+}
+.brick_header{
+	width: 100%;
+}
+.smalltxt{
+	font-size: 1rem;
+	font-weight: 500;
+	padding: .25rem 0;
+}
+.smallid{
+	font-size: .8rem;
+	font-weight: 400;
+	color: #3d3d3d;
+}
+.price_brick{
+	padding: 1rem 0;
+}
